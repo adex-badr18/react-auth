@@ -27,7 +27,7 @@ const Register = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        usernameRef.current.focus();
+        usernameRef.current?.focus();
     }, []);
 
     useEffect(() => {
@@ -60,7 +60,6 @@ const Register = () => {
             return;
         }
         setSuccess(true);
-        console.log(username, password);
 
         // try {
         //     const response = await axios.post(REGISTER_URL,
@@ -93,15 +92,17 @@ const Register = () => {
             {
                 success ?
                     (
-                        <section>
-                            <h1>Success!</h1>
-                            <p>
-                                <a href="#">Sign In</a>
-                            </p>
+                        <section className='h-screen flex items-center justify-center'>
+                            <div className='w-full max-w-[400px] bg-blue-900 p-6'>
+                                <h1 className='text-2xl text-white mb-2 font-semibold'>Success!</h1>
+                                <p className=''>
+                                    <a href="#" className='underline decoration-solid text-white'>Sign In</a>
+                                </p>
+                            </div>
                         </section>
                     ) :
                     (
-                        <section className='h-screen flex items-center justify-center px-16'>
+                        <section className='h-screen flex items-center justify-center'>
                             <div className='w-full max-w-[400px] bg-blue-900 p-6'>
                                 <p ref={errRef} className={errMsg ? 'text-red-700 bg-red-200 p-2 text-sm font-medium mb-2' : 'sr-only'} aria-live='assertive'>{errMsg}</p>
                                 <h1 className='text-3xl text-white mb-4 font-semibold'>Register</h1>
