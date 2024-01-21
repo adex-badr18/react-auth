@@ -3,7 +3,7 @@ import Register from './pages/Register';
 
 function App() {
     return (
-        <main>
+        <main className='min-h-screen w-screen bg-blue-400'>
             <Register />
         </main>
     )
