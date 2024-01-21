@@ -213,7 +213,7 @@ const Register = () => {
                                     Already registered?
                                     <span className=''>
                                         {/* router link below */}
-                                        <a href="#" className='underline decoration-solid'>Sign in</a>
+                                        <a href="#" className='underline decoration-solid'>Sign In</a>
                                     </span>
                                 </p>
                             </div>
