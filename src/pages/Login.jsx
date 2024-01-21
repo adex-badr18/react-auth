@@ -1,15 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
-import { FaCheck } from "react-icons/fa6";
-import { FaTimes, FaInfoCircle } from "react-icons/fa";
+import { useState, useRef, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
 import axios from '../api/axios';
 
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+const LOGIN_URL = '/auth';
 
 const Login = () => {
     const usernameRef = useRef();
     const errRef = useRef();
+    const { setAuth } = useContext(AuthContext);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -27,13 +25,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(username, password);
-        setUsername('');
-        setPassword('');
-        setSuccess(true);
+        if (username === 'badru' && password === 'badru123') {
+            setAuth({username, password});
+            setUsername('');
+            setPassword('');
+            setSuccess(true);
+        } else {
+            setErrorMsg('Invalid login details!');
+            errRef.current.focus();
+        }
 
         // try {
-        //     const response = await axios.post(REGISTER_URL,
+        //     const response = await axios.post(LOGIN_URL,
         //         { username, password },
         //         {
         //             headers: { 'Content-Type': 'application/json' },
@@ -41,16 +44,23 @@ const Login = () => {
         //         }
         //     );
 
-        //     console.log(response);
-        //     console.log(response.data);
-        //     console.log(response.accessToken);
+        //     console.log(JSON.stringify(response?.data));
+        //     console.log(JSON.stringify(response));
+        //     console.log(response?.data);
+        //     console.log(response?.data?.accessToken);
+        //     const roles = response.data?.roles;
+        //     const accessToken = response.data?.accessToken;
+        //     setAuth({username, password});
+        //     setUsername('');
+        //     setPassword('');
         //     setSuccess(true);
-        //     // Clear input fields
         // } catch (error) {
         //     if (!error?.response) {
-        //         setErrorMsg('No Server Response');
+        //         setErrorMsg('No Server Response!');
         //     } else if (error.response?.status === 400) {
-        //         setErrorMsg('Username Taken');
+        //         setErrorMsg('Incorrect username or password!');
+        //     } else if (error.response?.status === 401) {
+        //         setErrorMsg('Unauthorized!');
         //     } else {
         //         setErrorMsg('Registration Failed!');
         //     }
