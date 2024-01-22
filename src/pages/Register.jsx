@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes, FaInfoCircle } from "react-icons/fa";
 import axios from '../api/axios';
@@ -23,7 +24,7 @@ const Register = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
-    const [errMsg, setErrorMsg] = useState('Registration Failed!');
+    const [errMsg, setErrorMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
@@ -213,7 +214,7 @@ const Register = () => {
                                     Already registered?
                                     <span className=''>
                                         {/* router link below */}
-                                        <a href="#" className='underline decoration-solid'>Sign In</a>
+                                        <Link to='/login' className='underline decoration-solid'>Sign In</Link>
                                     </span>
                                 </p>
                             </div>
